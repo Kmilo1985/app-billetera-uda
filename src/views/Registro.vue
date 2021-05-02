@@ -1,88 +1,142 @@
 <template>
   <div class="container">
-   <router-link to="/Registro" >Registro</router-link> |
+    <router-link to="/Registro">Registro</router-link> |
     <router-link to="/servicios">Inicio</router-link> |
-    <router-link to="/" >Home</router-link>
-    <form class="form-horizontal" role="form">
-      <h2>Registro</h2>
-      <div class="form-group">
-        <label for="firstName" class="col-sm-3 control-label">Nombre</label>
-        <div class="col-sm-13">
+    <router-link to="/">Home</router-link>
+    <!-- /form -->
+    <br />
+    <br />
+
+    <h2 class="center-center">Gestion de registro</h2>
+    <form style="margin: 20px" @submit.prevent="registrar()">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="password" class="col-md-3 control-label">Nombre*</label>
           <input
-            type="text"
-            id="firstName"
-            placeholder="First Name"
+            type="nombre"
+            id="nombre"
+            placeholder="nombre"
             class="form-control"
-            autofocus
+            v-model="user.nombre"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="col-md-3 control-label">Apellido*</label>
+          <input
+            type="apellido"
+            id="apellido"
+            placeholder="apellido"
+            class="form-control"
+            v-model="user.apellido"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="col-md-3 control-label"
+            >Direccion*</label
+          >
+          <input
+            type="direccion"
+            id="direccion"
+            placeholder="direccion"
+            class="form-control"
+            v-model="user.direccion"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="col-md-3 control-label">Telefono*</label>
+          <input
+            type="telefono"
+            id="telefono"
+            placeholder="telefono"
+            class="form-control"
+            v-model="user.telefono"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="col-md-3 control-label">Celular*</label>
+          <input
+            type="celular"
+            id="celular"
+            placeholder="celular"
+            class="form-control"
+            v-model="user.celular"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="col-md-6 control-label"
+            >Número Cuenta*</label
+          >
+          <input
+            type="cuenta"
+            id="cuenta"
+            placeholder="Número de cuenta"
+            class="form-control"
+            v-model="user.cuenta"
           />
         </div>
       </div>
-      <div class="form-group">
-        <label for="lastName" class="col-sm-3 control-label">Apellido</label>
-        <div class="col-sm-13">
-          <input
-            type="text"
-            id="lastName"
-            placeholder="Last Name"
-            class="form-control"
-            autofocus
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email" class="col-sm-3 control-label">Email* </label>
-        <div class="col-sm-13">
-          <input
-            type="email"
-            id="email"
-            placeholder="Email"
-            class="form-control"
-            name="email"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="col-sm-3 control-label">Password*</label>
-        <div class="col-sm-13">
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            class="form-control"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="col-sm-10 control-label"
-          >Confirmar Contraseña*</label
-        >
-        <div class="col-sm-13">
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            class="form-control"
-          />
-        </div>
-      </div>
-      <!-- /.form-group -->
-      <div class="form-group">
-        <div class="col-sm-13 col-sm-offset-3">
-          <span class="help-block">*Campos requeridos</span>
-        </div>
-      </div>
+      <br />
       <button type="submit" class="btn btn-primary btn-block">
         Registrarse
       </button>
     </form>
-    <!-- /form -->
   </div>
   <!-- ./container -->
 </template>
 
 <script>
+import Swal from "sweetalert2";
+import "sweetalert2/src/sweetalert2.scss";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 export default {
   name: "Registro",
+  data: function () {
+    return {
+      user: {
+        nombre: "",
+        apellido: "",
+        direccion: "",
+        telefono: "",
+        celular: "",
+        cuenta: "",
+      },
+    };
+  },
+  methods: {
+    registrar() {
+      console.log(this.user, "Usuario");
+
+      // Login...
+      axios
+        .post("http://localhost:3000/usuarios", this.user)
+        .then((res) => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registro completas",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          console.log(res);
+          this.$router.push("/servicios");
+        })
+        .catch(function (error) {
+          console.log("error");
+          console.log(error.response["status"]);
+          if (error.response["status"] == 500) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "A pasado un error ",
+              footer: "<a href>Servidor ausente o conexion?</a>",
+            });
+          }
+          throw error;
+          // when you throw error this will also fetch error.
+        });
+    },
+  },
 };
 </script>
 
@@ -97,13 +151,11 @@ body {
   padding: 15px;
   margin: 0 auto;
   border-radius: 0.3em;
-  background-color: #f2f2f2;
 }
 *[role="form"] h2 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 40px;
   font-weight: 600;
-  color: #de6262;
   margin-top: 5%;
   text-align: center;
   text-transform: uppercase;

@@ -1,0 +1,86 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Cristian Camilo",
+      "apellido": "Paniagua Muñoz",
+      "direccion": "Calle 66 DD número 69 B 76",
+      "telefono": "23234324",
+      "celular": "3002555307",
+      "cuenta": "3243434"
+    },
+    {
+      "id": 2,
+      "nombre": "Cristian Camilo",
+      "apellido": "Paniagua Muñoz",
+      "direccion": "Calle 66 DD número 69 B 76",
+      "telefono": "23234324",
+      "celular": "3002555307",
+      "cuenta": "3243434"
+    },
+    {
+      "nombre": "Cristian Camilo",
+      "apellido": "Muñoz Paniagua",
+      "direccion": "Calle 48 DD número 99 B 155",
+      "telefono": "(300) 255-5307",
+      "celular": "323234234",
+      "cuenta": "345345",
+      "id": 3
+    }
+  ],
+  "cuentas": [
+    {
+      "idUsuario": 0,
+      "fechaActivacion": "2021-05-29T19:38:18.804Z",
+      "fechaCierre": "2021-05-15T19:38:21.372Z",
+      "saldoCuenta": 500000,
+      "tipoTransaccion": "Abonar",
+      "id": 4
+    },
+    {
+      "idUsuario": 0,
+      "fechaActivacion": "2021-05-14T19:47:11.661Z",
+      "fechaCierre": "2021-05-11T19:47:13.392Z",
+      "saldoCuenta": "976888",
+      "tipoTransaccion": "Abonar",
+      "id": 6
+    }
+  ],
+  "abonar": [
+    {
+      "id": 1,
+      "idUsuario": 1,
+      "fechaActivacion": "13/05/2021",
+      "fechaCierre": "13/05/2021",
+      "saldoCuenta": 500000
+    },
+    {
+      "id": 2,
+      "cantidad": 3000,
+      "formaDeAbono": "Transaccion"
+    },
+    {
+      "cantidad": "asdasd",
+      "formaDeAbono": "wqw",
+      "id": 3
+    },
+    {
+      "cantidad": "",
+      "formaDeAbono": "",
+      "id": 4
+    }
+  ],
+  "enviar": [
+    {
+      "id": 1,
+      "monto": 3000,
+      "destinatario": "correo@cuenta.com.co"
+    },
+    
+    {
+      "monto": "",
+      "destinatario": "",
+      "id": 2
+    }
+  ]
+}
